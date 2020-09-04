@@ -1,0 +1,62 @@
+#! /usr/bin/env node
+
+const program = require('commander');
+const Project = require('../src/project');
+
+program
+  .option("-l, --local", "使用本地全局 @vue/cli 4.1.*", false)
+  .option("-R, --no-router", "使用 vue-router")
+
+program.parse(process.argv);
+
+// 项目名
+const programName = program.args.join(" ");
+
+// 获取参数
+const {
+  local,
+  router
+} = program;
+
+console.log(
+  local,
+  router)
+
+
+const project = new Project({
+  programName,
+  local,
+  router
+});
+
+project.checkNodeJsVersion()
+
+
+
+// project.create();
+
+
+
+// 参数：
+// 0. 判断本地 Node.js 版本。   建议使用 Node.js v10 以上的版本
+// 1. 是否使用本地 vue-cli
+//      如果不用，就使用 npx @vue/cli@4.1 ...
+//      判断 vue-cli 版本是否为 4.1 ，否则升级或降级     npm update -g @vue/cli
+//      判断本地是否有 vue-cli
+//      否则先全局安装 vue-cli        npm install -g @vue/cli
+// 2. 项目名（必填）
+// 3. 是否使用路由（默认使用）
+// 4. 使用 @vue/cli 创建项目，  create <name> --default --no-git
+// 5. 创建配置文件
+// 
+// 
+// 
+
+
+// const chalk = require('chalk')
+
+// // TODO:
+// console.log()
+// console.log(chalk.cyan(`  npm uninstall -g vue-cli`))
+// console.log(chalk.cyan(`  npm install -g @vue/cli`))
+// console.log()

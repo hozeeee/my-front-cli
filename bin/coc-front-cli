@@ -1,0 +1,26 @@
+const program = require('commander');
+const chalk = require('chalk');
+
+// command() 会调用对应的 "coc-front-cli-*" 文件，如 "coc-front-cli-create"
+
+program
+  .version(require("../package").version)
+  .usage("<command> [options]")
+  .command("create <app-name> [options]", "创建一个新项目")
+  .parse(process.argv);
+
+// console.log("111", program.args, program)
+
+
+
+if (program.args.length <= 1) {
+  console.log(
+    chalk.red("缺少参数 %s."),
+    chalk.keyword("orange")("<app-name>"),
+  );
+  console.log(
+    chalk.red("命令提示: %s."),
+    chalk.keyword("orange")("coc-front-cli create <app-name> [options]"),
+  );
+  process.exit(1);
+}
